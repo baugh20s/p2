@@ -3,7 +3,7 @@
 
 
 #check for form submission; set values to null if not submitted
-if (isset($_GET)) {
+if (count($_GET)) {
     #Text input logic; display name that was entered after form is submitted
     $childName = $_GET['childName'];
 
