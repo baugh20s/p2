@@ -32,17 +32,23 @@ if (count($_GET)) {
 # Instantiate object(s)
 $form = new Form($_GET);
 
+# Get data from form request or default value
+$childName = $form->get('childName', 'your child');
+$collegeCostNow = $form->get('collegeCostNow', '50000');
+$yrsUntilStart = $form->get('yrsUntilStart', '4');
+$collegeInflation = $form->get('collegeInflation', '6');
+
 # Check to see if form is submitted (see if GET is empty)
 $submitted = $form->isSubmitted();
 
-# If submitted, validate the form, set the validation rules for each field and run them
+# If submitted, validate the form, set the validation rules for each field, and run them
 if ($submitted) {
     $errorList = $form->validate(
         [
             'childName' => 'required|alpha|minLength:2|maxLength:50',
             'collegeCostNow' => 'required|digit',
             'yrsUntilStart' => 'required|digit|min:1|max:100',
-            'collegeInflation' => 'required',
+            'collegeInflation' => 'required|min:0',
         ]
     );
 
@@ -53,13 +59,4 @@ if ($submitted) {
         #future college cost = collegeCostNow * (1 + collegeInflation) raised to (yrsUntilStart)
         $collegeCostFuture = round($collegeCostNow * pow((1 + ($collegeInflation / 100)), $yrsUntilStart), 2);
     }
-};
-
-# If there are no errors, get the values and set relevant defaults.
-if (!isset($errorList) || count($errorList) == 0) {
-    # Get data from form request
-    $childName = $form->get('childName');
-    $collegeCostNow = $form->get('collegeCostNow');
-    $yrsUntilStart = $form->get('yrsUntilStart');
-    $collegeInflation = $form->get('collegeInflation');
 };
