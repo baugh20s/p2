@@ -3,7 +3,6 @@
 <?php
 require 'helpers.php';
 require 'logic.php';
-require 'calcCollegeCost.php';
 ?>
 
 <head>
@@ -93,14 +92,12 @@ require 'calcCollegeCost.php';
             }
             else {
                 ?>
-                <div class=''>
+                <div>
                 <p>The estimated cost of college each year when
                     <?php echo $childName; ?>
                     starts is:</p>
                 <?php
-                #future value = (cash flow at period 0) * (1 + rate of return) raised to (number of periods)
-                #future college cost = collegeCostNow * (1 + collegeInflation) raised to (yrsUntilStart)
-                $collegeCostFuture = round($collegeCostNow * pow((1 + ($collegeInflation / 100)), $yrsUntilStart), 2);
+
                 echo '$' . number_format($collegeCostFuture);
             }
         }
