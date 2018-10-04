@@ -12,7 +12,7 @@ $submitted = $form->isSubmitted();
 if ($submitted) {
     $errorList = $form->validate(
         [
-            'childName' => 'required|alpha|minLength:2|maxLength:50|name:your child',
+            'childName' => 'required|alpha|minLength:2|maxLength:50',
             'collegeCostNow' => 'required|digit',
             'yrsUntilStart' => 'required|digit|min:1|max:100',
             'collegeInflation' => 'required',
